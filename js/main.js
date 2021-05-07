@@ -54,10 +54,17 @@
     
     function scrollLoop (){
         prevScrollHeight=0;
-        for (let i = 0; i<sceneInfo.length; i++) {
+        for (let i = 0; i<currentScene; i++) {
             prevScrollHeight += sceneInfo[i].scrollHeight;
         }
-         console.log(prevScrollHeight);
+        if(yOffset>prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+            currentScene++;
+        }
+        if(yOffset<prevScrollHeight) {
+            if(currentScene===0) return;
+            currentScene--;
+        }
+        console.log(currentScene);
     }
 
     window.addEventListener('resize', setLayout);
